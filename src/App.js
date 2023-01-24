@@ -1,4 +1,4 @@
-/* This is a React functional component named "App" that uses the useState hook to manage the state of a contact list. The component renders a table of contacts using the ReadOnlyRow and EditableRow components and includes functionality for adding, editing, and deleting contacts, as well as searching for contacts. The component also uses the nanoid library to generate unique IDs for new contacts, and it uses the mock-data.json file to initially populate the contact list. The component's state includes the contact list, the data for the add and edit forms, the ID of the contact being edited, and the search term used to filter the contact list. */
+/* This is a React functional component named "App" that uses the useState hook to manage the state of a product list. The component renders a table of contacts using the ReadOnlyRow and EditableRow components and includes functionality for adding, editing, and deleting contacts, as well as searching for contacts. The component also uses the nanoid library to generate unique IDs for new contacts, and it uses the mock-data.json file to initially populate the product list. The component's state includes the product list, the data for the add and edit forms, the ID of the product being edited, and the search term used to filter the product list. */
 
 import React, { useState, Fragment } from "react";
 import { nanoid } from "nanoid";
@@ -8,9 +8,9 @@ import ReadOnlyRow from "./components/ReadOnlyRow";
 import EditableRow from "./components/EditableRow";
 
 const App = () => {
-	/*   In this line of code, useState is a hook that allows the component to use state. It is called with the initial state value, which is the data imported from the "mock-data.json" file. The hook returns an array with two elements: the first element is the current state value, which is assigned to the variable contacts, and the second element is a function that can be used to update the state value, which is assigned to the variable setContacts. So, contacts variable holds the current state, and setContacts function is used to update the state.
+	/*   In this line of code, useState is a hook that allows the component to use state. It is called with the initial state value, which is the data imported from the "mock-data.json" file. The hook returns an array with two elements: the first element is the current state value, which is assigned to the variable contacts, and the second element is a function that can be used to update the state value, which is assigned to the variable setProducts. So, contacts variable holds the current state, and setProducts function is used to update the state.
 	 */
-	const [contacts, setContacts] = useState(data);
+	const [contacts, setProducts] = useState(data);
 
 	/*   This line of code is similar to the previous one, it is also using the useState hook to manage the state of the add form data.
 
@@ -36,12 +36,12 @@ const App = () => {
 		Quantity: "",
 	});
 
-	/*   In this line of code, useState is being called with an initial state value of null and it returns an array with two elements: the first element is the current state value of the editContactId, which is assigned to the variable editContactId, and the second element is a function that can be used to update the state value, which is assigned to the variable setEditContactId.
+	/*   In this line of code, useState is being called with an initial state value of null and it returns an array with two elements: the first element is the current state value of the editProductId, which is assigned to the variable editProductId, and the second element is a function that can be used to update the state value, which is assigned to the variable setEditProductId.
 
-  editContactId variable holds the id of the contact that is currently being edited. When the user clicks on the "Edit" button of a contact, the function handleEditClick is called and it sets the editContactId with the id of the contact that was clicked. This value is then used to identify which contact to update when the user submits the edit form.
-  setEditContactId is a function that is used to update the editContactId state. It's called when user clicks on the edit button or cancel the edit mode. */
+  editProductId variable holds the id of the product that is currently being edited. When the user clicks on the "Edit" button of a product, the function handleEditClick is called and it sets the editProductId with the id of the product that was clicked. This value is then used to identify which product to update when the user submits the edit form.
+  setEditProductId is a function that is used to update the editProductId state. It's called when user clicks on the edit button or cancel the edit mode. */
 
-	const [editContactId, setEditContactId] = useState(null);
+	const [editProductId, setEditProductId] = useState(null);
 
 	const handleAddFormChange = (event) => {
 		event.preventDefault();
@@ -70,62 +70,62 @@ const App = () => {
 	const handleAddFormSubmit = (event) => {
 		event.preventDefault();
 
-		const newContact = {
+		const newProduct = {
 			id: nanoid(),
 			Name: addFormData.Name,
 			Price: addFormData.Price,
 			Quantity: addFormData.Quantity,
 		};
 
-		const newContacts = [...contacts, newContact];
-		setContacts(newContacts);
+		const newProducts = [...contacts, newProduct];
+		setProducts(newProducts);
 	};
 
 	const handleEditFormSubmit = (event) => {
 		event.preventDefault();
 
-		const editedContact = {
-			id: editContactId,
+		const editedProduct = {
+			id: editProductId,
 			Name: editFormData.Name,
 			Price: editFormData.Price,
 			Quantity: editFormData.Quantity,
 		};
 
-		const newContacts = [...contacts];
+		const newProducts = [...contacts];
 
-		const index = contacts.findIndex((contact) => contact.id === editContactId);
+		const index = contacts.findIndex((product) => product.id === editProductId);
 
-		newContacts[index] = editedContact;
+		newProducts[index] = editedProduct;
 
-		setContacts(newContacts);
-		setEditContactId(null);
+		setProducts(newProducts);
+		setEditProductId(null);
 	};
 
-	const handleEditClick = (event, contact) => {
+	const handleEditClick = (event, product) => {
 		event.preventDefault();
-		setEditContactId(contact.id);
+		setEditProductId(product.id);
 
 		const formValues = {
-			Name: contact.Name,
-			Price: contact.Price,
-			Quantity: contact.Quantity,
+			Name: product.Name,
+			Price: product.Price,
+			Quantity: product.Quantity,
 		};
 
 		setEditFormData(formValues);
 	};
 
 	const handleCancelClick = () => {
-		setEditContactId(null);
+		setEditProductId(null);
 	};
 
 	const handleDeleteClick = (contactId) => {
-		const newContacts = [...contacts];
+		const newProducts = [...contacts];
 
-		const index = contacts.findIndex((contact) => contact.id === contactId);
+		const index = contacts.findIndex((product) => product.id === contactId);
 
-		newContacts.splice(index, 1);
+		newProducts.splice(index, 1);
 
-		setContacts(newContacts);
+		setProducts(newProducts);
 	};
 
 	const [searchTerm, setSearchTerm] = useState("");
@@ -134,8 +134,8 @@ const App = () => {
 		setSearchTerm(event.target.value);
 	};
 
-	const filteredContacts = contacts.filter((contact) =>
-		contact.Name.toLowerCase().includes(searchTerm.toLowerCase())
+	const filteredProducts = contacts.filter((product) =>
+		product.Name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
 	return (
@@ -160,9 +160,9 @@ const App = () => {
 						</tr>
 					</thead>
 					<tbody className="bg-light">
-						{filteredContacts.map((contact) => (
+						{filteredProducts.map((product) => (
 							<Fragment>
-								{editContactId === contact.id ? (
+								{editProductId === product.id ? (
 									<EditableRow
 										editFormData={editFormData}
 										handleEditFormChange={handleEditFormChange}
@@ -170,7 +170,7 @@ const App = () => {
 									/>
 								) : (
 									<ReadOnlyRow
-										contact={contact}
+										product={product}
 										handleEditClick={handleEditClick}
 										handleDeleteClick={handleDeleteClick}
 									/>
