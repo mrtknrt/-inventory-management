@@ -1,4 +1,4 @@
-/* This is a React functional component named "App" that uses the useState hook to manage the state of a product list. The component renders a table of contacts using the ReadOnlyRow and EditableRow components and includes functionality for adding, editing, and deleting contacts, as well as searching for contacts. The component also uses the nanoid library to generate unique IDs for new contacts, and it uses the mock-data.json file to initially populate the product list. The component's state includes the product list, the data for the add and edit forms, the ID of the product being edited, and the search term used to filter the product list. */
+/* This is a React functional component named "App" that uses the useState hook to manage the state of a product list. The component renders a table of products using the ReadOnlyRow and EditableRow components and includes functionality for adding, editing, and deleting products, as well as searching for products. The component also uses the nanoid library to generate unique IDs for new products, and it uses the mock-data.json file to initially populate the product list. The component's state includes the product list, the data for the add and edit forms, the ID of the product being edited, and the search term used to filter the product list. */
 
 import React, { useState, Fragment } from "react";
 
@@ -6,21 +6,21 @@ import React, { useState, Fragment } from "react";
 
 nanoid is a small, secure, and fast library that generates unique, non-guessable, URL-friendly ids. It's a helper function that creates a unique id, based on a cryptographically-strong random generator.
 
-In this case, it's used in the handleAddFormSubmit function to generate a unique id for each new contact that is added to the contact list. The nanoid() function is called to generate a new id, which is then used as the id of the new contact object, before being added to the contact list. */
+In this case, it's used in the handleAddFormSubmit function to generate a unique id for each new product that is added to the product list. The nanoid() function is called to generate a new id, which is then used as the id of the new product object, before being added to the product list. */
 import { nanoid } from "nanoid";
 import "./App.css";
 
 /* This line of code is importing the data from a JSON file named "mock-data.json" in the same directory as the JavaScript file. JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. It's a common format for storing and exchanging data.
 
-In this case, the imported data is being used to initialize the state of the contact list when the component is first rendered. The data is an array of objects, each object represents a contact with properties such as "Name", "Price", and "Quantity". And, this data is used to populate the contact list when the component first renders. */
+In this case, the imported data is being used to initialize the state of the product list when the component is first rendered. The data is an array of objects, each object represents a product with properties such as "Name", "Price", and "Quantity". And, this data is used to populate the product list when the component first renders. */
 import data from "./mock-data.json";
 import ReadOnlyRow from "./components/ReadOnlyRow";
 import EditableRow from "./components/EditableRow";
 
 const App = () => {
-	/*   In this line of code, useState is a hook that allows the component to use state. It is called with the initial state value, which is the data imported from the "mock-data.json" file. The hook returns an array with two elements: the first element is the current state value, which is assigned to the variable contacts, and the second element is a function that can be used to update the state value, which is assigned to the variable setProducts. So, contacts variable holds the current state, and setProducts function is used to update the state.
+	/*   In this line of code, useState is a hook that allows the component to use state. It is called with the initial state value, which is the data imported from the "mock-data.json" file. The hook returns an array with two elements: the first element is the current state value, which is assigned to the variable products, and the second element is a function that can be used to update the state value, which is assigned to the variable setProducts. So, products variable holds the current state, and setProducts function is used to update the state.
 	 */
-	const [contacts, setProducts] = useState(data);
+	const [products, setProducts] = useState(data);
 
 	/*   This line of code is similar to the previous one, it is also using the useState hook to manage the state of the add form data.
 
@@ -124,7 +124,7 @@ Finally, it updates the state of the products by calling the setProducts functio
 			Quantity: addFormData.Quantity,
 		};
 
-		const newProducts = [...contacts, newProduct];
+		const newProducts = [...products, newProduct];
 		setProducts(newProducts);
 	};
 
@@ -149,9 +149,9 @@ Finally, it updates the state of the products by calling the setProducts functio
 			Quantity: editFormData.Quantity,
 		};
 
-		const newProducts = [...contacts];
+		const newProducts = [...products];
 
-		const index = contacts.findIndex((product) => product.id === editProductId);
+		const index = products.findIndex((product) => product.id === editProductId);
 
 		newProducts[index] = editedProduct;
 
@@ -186,19 +186,19 @@ It sets the state of editProductId to null by calling setEditProductId and passi
 		setEditProductId(null);
 	};
 
-	/*   This is a JavaScript function that handles the event when a user clicks on the "delete" button for a specific product in a list of products. The function is called handleDeleteClick and takes the contactId of the product to be deleted as its parameter.
+	/*   This is a JavaScript function that handles the event when a user clicks on the "delete" button for a specific product in a list of products. The function is called handleDeleteClick and takes the productId of the product to be deleted as its parameter.
 
 It creates a new array called newProducts that is a copy of the existing products array.
 
-It uses the findIndex method to find the index of the product in the products array that has the same id as the contactId.
+It uses the findIndex method to find the index of the product in the products array that has the same id as the productId.
 
 Then it uses the splice method to remove the item from the newProducts array at the index that was found.
 
 Finally, it updates the state of the products by calling the setProducts function and passing in the newProducts array as the argument. This will update the product list and the deleted product will no longer be visible to the user. */
-	const handleDeleteClick = (contactId) => {
-		const newProducts = [...contacts];
+	const handleDeleteClick = (productId) => {
+		const newProducts = [...products];
 
-		const index = contacts.findIndex((product) => product.id === contactId);
+		const index = products.findIndex((product) => product.id === productId);
 
 		newProducts.splice(index, 1);
 
@@ -223,14 +223,14 @@ This function is likely being used as the onChange event handler for the search 
 
 	/*   This is a JavaScript code that creates a new variable filteredProducts which is an array of products that pass a certain filter criteria.
 
-It uses the filter method to filter the contacts array and create a new array filteredProducts which only contains the products whose Name property includes the current searchTerm after converting both to lowercase.
+It uses the filter method to filter the products array and create a new array filteredProducts which only contains the products whose Name property includes the current searchTerm after converting both to lowercase.
 
 It uses the toLowerCase() method to make sure the search is case-insensitive, so that it finds products whether the search term is in uppercase or lowercase.
 
 The includes() method is used to check if the Name property of the product includes the searchTerm after converting both to lowercase. If it does, the product will be included in the filteredProducts array.
 
 This filteredProducts variable is likely to be used to display the filtered product list based on the search term entered by the user. */
-	const filteredProducts = contacts.filter((product) =>
+	const filteredProducts = products.filter((product) =>
 		product.Name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 

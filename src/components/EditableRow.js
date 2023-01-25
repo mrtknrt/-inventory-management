@@ -1,9 +1,9 @@
 /* 
-This is a functional React component named "EditableRow" that renders a table row for editing a contact. It receives three props: editFormData, handleEditFormChange, and handleCancelClick which are passed down from the parent component.
+This is a functional React component named "EditableRow" that renders a table row for editing a product. It receives three props: editFormData, handleEditFormChange, and handleCancelClick which are passed down from the parent component.
 
-The component returns JSX that renders a <tr> element that contains three <td> elements, each containing an input element for editing the name, price, and quantity of the contact. The value of each input is set to the corresponding property of the editFormData prop, and the onChange event is set to call the handleEditFormChange function passed down from the parent component.
+The component returns JSX that renders a <tr> element that contains three <td> elements, each containing an input element for editing the name, price, and quantity of the product. The value of each input is set to the corresponding property of the editFormData prop, and the onChange event is set to call the handleEditFormChange function passed down from the parent component.
 
-The component also contains two buttons, one for submitting the form and one for canceling the editing of the contact. The Save button is of class "btn btn-success" and the Cancel button of class "btn btn-danger" and calls the handleCancelClick function passed down from the parent component when clicked.
+The component also contains two buttons, one for submitting the form and one for canceling the editing of the product. The Save button is of class "btn btn-success" and the Cancel button of class "btn btn-danger" and calls the handleCancelClick function passed down from the parent component when clicked.
 
 Finally, the component exports the "EditableRow" component so that it can be imported and used in other parts of the application.
 import React from "react";
