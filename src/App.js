@@ -6,7 +6,10 @@ import React, { useState, Fragment } from "react";
 
 nanoid is a small, secure, and fast library that generates unique, non-guessable, URL-friendly ids. It's a helper function that creates a unique id, based on a cryptographically-strong random generator.
 
-In this case, it's used in the handleAddFormSubmit function to generate a unique id for each new product that is added to the product list. The nanoid() function is called to generate a new id, which is then used as the id of the new product object, before being added to the product list. */
+In this case, it's used in the handleAddFormSubmit function to generate a unique id for each new product that is added to the product list. The nanoid() function is called to generate a new id, which is then used as the id of the new product object, before being added to the product list.
+
+This is a React application that displays a list of products, allows the user to add new products, edit existing products, and delete products. It uses state to keep track of the products, form data, and the current product being edited. It also includes a search function to filter the products by name. The application uses functional components and hooks, such as useState, to manage state and handle events such as form submissions and button clicks. The application imports data from a mock JSON file and uses the nanoid library to generate unique IDs for new products. It also uses several custom components, such as ReadOnlyRow and EditableRow, to display the products in a table
+*/
 import { nanoid } from "nanoid";
 import "./App.css";
 
