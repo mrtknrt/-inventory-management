@@ -302,6 +302,13 @@ This filteredProducts variable is likely to be used to display the filtered prod
 					name="Name"
 					required="required"
 					placeholder="Enter a name"
+					/*        In the line of code you provided, the onChange event is being passed the handleAddFormChange function as a callback.
+
+          When the input element changes (for example, when a user types something into the input), the onChange event is triggered, and the function handleAddFormChange is executed.
+          
+          This function is responsible for updating the addFormData state with the new input value. It achieves this by first preventing the default behavior of the event, then it get the name and value of the input element that triggered the event, it creates a new object with the current addFormData state and update the property with the same name of the input element with the new value, then it set the updated object as the new state.
+          
+          By doing this, the addFormData state will always reflect the current value of the input elements in the form, allowing the application to keep track of the user's input and use it when the form is submitted. */
 					onChange={handleAddFormChange}
 				/>
 				<input
@@ -329,3 +336,12 @@ This filteredProducts variable is likely to be used to display the filtered prod
 };
 
 export default App;
+/* 
+The use of both a read-only row component and an editable row component allows for more flexibility in the design and functionality of the application.
+
+The read-only row component is used to display the products in a non-editable format, allowing users to view the information without the ability to change it.
+
+The editable row component is used when a user wants to edit a product. By clicking on the edit button, the product information is displayed in an editable format, allowing the user to modify the values and submit the changes.
+
+By separating the components in this way, it makes it easier to manage the state and logic for each type of row. It also allows for a more modular design, making it easier to add new features or make changes to the application in the future.
+ */
