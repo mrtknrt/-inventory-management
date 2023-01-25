@@ -159,6 +159,13 @@ Finally, it updates the state of the products by calling the setProducts functio
 		setEditProductId(null);
 	};
 
+	/*   This is a JavaScript function that handles the event when a user clicks on the "edit" button for a specific product in a list of products. The function is called handleEditClick and takes an event object and a product object as its parameters. The first line of the function uses the preventDefault() method to prevent the default behavior of the button click.
+
+It sets the state of editProductId to the id of the product that was clicked on by calling setEditProductId and passing in product.id as the argument.
+
+Then, it creates an object called formValues with properties Name, Price, and Quantity which are assigned with the values from the product object that was clicked on.
+
+Finally, it updates the state of the editFormData by calling the setEditFormData function and passing in the formValues object as the argument. This will set the initial value of the form fields when the user edits the product. */
 	const handleEditClick = (event, product) => {
 		event.preventDefault();
 		setEditProductId(product.id);
@@ -172,10 +179,22 @@ Finally, it updates the state of the products by calling the setProducts functio
 		setEditFormData(formValues);
 	};
 
+	/*   This is a JavaScript function that handles the event when a user clicks on the "cancel" button while editing a product in a list of products. The function is called handleCancelClick and takes no parameter.
+
+It sets the state of editProductId to null by calling setEditProductId and passing in null as the argument, This will effectively cancel the product that was being edited and the form will clear up. This will also hide the editing form and the user will be able to see the product list again. */
 	const handleCancelClick = () => {
 		setEditProductId(null);
 	};
 
+	/*   This is a JavaScript function that handles the event when a user clicks on the "delete" button for a specific product in a list of products. The function is called handleDeleteClick and takes the contactId of the product to be deleted as its parameter.
+
+It creates a new array called newProducts that is a copy of the existing products array.
+
+It uses the findIndex method to find the index of the product in the products array that has the same id as the contactId.
+
+Then it uses the splice method to remove the item from the newProducts array at the index that was found.
+
+Finally, it updates the state of the products by calling the setProducts function and passing in the newProducts array as the argument. This will update the product list and the deleted product will no longer be visible to the user. */
 	const handleDeleteClick = (contactId) => {
 		const newProducts = [...contacts];
 
@@ -186,12 +205,31 @@ Finally, it updates the state of the products by calling the setProducts functio
 		setProducts(newProducts);
 	};
 
+	/*   This is a JavaScript code that declares a state variable called searchTerm and a state setter function called setSearchTerm using the useState hook. The useState hook is a built-in hook in React that allows a component to have state.
+
+The initial value of the searchTerm state variable is set to an empty string (""). The setSearchTerm function is used to update the value of the searchTerm state variable.
+
+This searchTerm variable is likely to be used for searching specific products in the product list and the setSearchTerm function will be used to update the term when the user types in the search input field. */
 	const [searchTerm, setSearchTerm] = useState("");
 
+	/*   This is a JavaScript function that handles the change event when a user types into a search input field. The function is called handleSearchChange and takes an event object as its parameter.
+
+It calls the setSearchTerm function and passes in the value of the search input field, which is accessed through event.target.value. This updates the searchTerm state variable with the current value of the search input field.
+
+This function is likely being used as the onChange event handler for the search input field, so everytime the user types something in the search box it will update the searchTerm state variable with the current value of the search input field. This updated value can then be used to search or filter the product list. */
 	const handleSearchChange = (event) => {
 		setSearchTerm(event.target.value);
 	};
 
+	/*   This is a JavaScript code that creates a new variable filteredProducts which is an array of products that pass a certain filter criteria.
+
+It uses the filter method to filter the contacts array and create a new array filteredProducts which only contains the products whose Name property includes the current searchTerm after converting both to lowercase.
+
+It uses the toLowerCase() method to make sure the search is case-insensitive, so that it finds products whether the search term is in uppercase or lowercase.
+
+The includes() method is used to check if the Name property of the product includes the searchTerm after converting both to lowercase. If it does, the product will be included in the filteredProducts array.
+
+This filteredProducts variable is likely to be used to display the filtered product list based on the search term entered by the user. */
 	const filteredProducts = contacts.filter((product) =>
 		product.Name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
@@ -218,6 +256,23 @@ Finally, it updates the state of the products by calling the setProducts functio
 						</tr>
 					</thead>
 					<tbody className="bg-light">
+						{/* 
+          This is a JSX code that maps through the filtered product list, filteredProducts , and for each product, it renders either an EditableRow component or a ReadOnlyRow component.
+
+          It uses the map() method to iterate through the filteredProducts array, and for each product, it returns a Fragment element containing either the EditableRow component or the ReadOnlyRow component. The component that is rendered is determined by a ternary operator, which checks whether the editProductId state variable is equal to the id of the current product. If it is, the EditableRow component is rendered, otherwise, the ReadOnlyRow component is rendered.
+
+          The EditableRow component is passed the following props:
+
+          editFormData: The current state of the edit form data, which is the editFormData state variable.
+          handleEditFormChange: A function that handles changes to the edit form, which is the handleEditFormChange function.
+          handleCancelClick: A function that handles the click event when the user clicks the cancel button, which is the handleCancelClick function.
+          The ReadOnlyRow component is passed the following props:
+
+          product: The current product being rendered, which is the product object from the filteredProducts array.
+          handleEditClick: A function that handles the click event when the user clicks the edit button, which is the handleEditClick function.
+          handleDeleteClick: A function that handles the click event when the user clicks the delete button, which is the handleDeleteClick function.
+          It is likely that the EditableRow component shows the current product being edited and the ReadOnlyRow component shows the rest of the products in the list. */}
+
 						{filteredProducts.map((product) => (
 							<Fragment>
 								{editProductId === product.id ? (
